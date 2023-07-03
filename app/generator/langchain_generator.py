@@ -1,14 +1,13 @@
-from .langchain_config import LangChainConfig
-from .langchain_model import Element
-
+from ..config import langchain_config
+from ..model import langchain_model
 
 class LangChainGenerator:
-    config: LangChainConfig
+    config: langchain_config.LangChainConfig
 
-    def __init__(self, config: LangChainConfig) -> None:
+    def __init__(self, config: langchain_config.LangChainConfig) -> None:
         self.config = config
 
-    def Generate(self, elements: list[Element]) -> list[str]:
+    def Generate(self, elements: list[langchain_model.Element]) -> list[str]:
         installs = []
         imports = []
         items = []
