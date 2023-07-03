@@ -1,10 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-import langchain_model
-import langchain_config
-import langchain_generator
-
+from .langchain_model import ElementsRequest
+from .langchain_config import Loader
+from .langchain_generator import LangChainGenerator
 
 app = FastAPI()
 origins = ["*"]
@@ -16,11 +15,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-langConfig = langchain_config.Loader("langchain-config.json").load()
-generator = langchain_generator.LangChainGenerator(langConfig)
+langConfig = Loader("app/config.json").load()
+generator = LangChainGenerator(langConfig)
 
 @app.post("/api/build-app")
-async def build_app(request: langchain_model.ElementsRequest):
+async def build_app(request: ElementsRequest):
     return {
         'lines': generator.Generate(request.elements)
     }

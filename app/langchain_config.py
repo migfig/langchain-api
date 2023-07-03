@@ -3,7 +3,6 @@ from dataclasses import dataclass
 from pathlib import Path
 import json
 
-
 @dataclass
 class Arg:
     name: str
@@ -44,7 +43,6 @@ class Loader:
 
     def __init__(self, path: Union[str, Path]) -> None:
         self.json_path = path
-        pass
 
     def load(self):
         with open(self.json_path, 'r') as f:
